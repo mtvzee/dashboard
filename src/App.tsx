@@ -1,5 +1,11 @@
+import Background from './components/Background';
+
 const App = () => {
-  return <div>Enter</div>;
+  return (
+    <Background>
+      <div>time</div>
+    </Background>
+  );
 };
 
 export default App;
