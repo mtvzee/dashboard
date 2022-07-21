@@ -34,7 +34,7 @@ const Background: FC<Props> = ({ children }) => {
   useEffect(() => {
     const fetchBackgroundImage = async () => {
       const res = await fetch(
-        `https://pixabay.com/api/?key=28160622-0377c9a513987770fa00672f3&q=ocean&image_type=photo`
+        `https://pixabay.com/api/?key=28160622-0377c9a513987770fa00672f3&q=cosmo&image_type=photo`
       );
       const data = await res.json();
       setBgImageData(data.hits);
@@ -43,7 +43,7 @@ const Background: FC<Props> = ({ children }) => {
   }, []);
   return (
     <div
-      className="w-full h-screen bg-no-repeat bg-cover bg-center relative flex items-center justify-center"
+      className="relative w-full h-screen bg-center bg-no-repeat bg-cover"
       style={{
         backgroundImage: `url(${
           bgImageData[Math.floor(Math.random() * bgImageData.length)]
