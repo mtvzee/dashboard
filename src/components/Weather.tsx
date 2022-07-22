@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { WeatherData } from '../../types/weatherData';
 
-const Weather:FC = () => {
+const Weather: FC = () => {
   const [data, setData] = useState<WeatherData>();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -33,10 +33,7 @@ const Weather:FC = () => {
         <h2 className="self-end">{data?.name}</h2>
       </div>
       {isOpen && (
-        <div
-          className="fixed top-0 left-0 w-full h-full"
-          onClick={() => setIsOpen(false)}
-        >
+        <div className="fixed inset-0" onClick={() => setIsOpen(false)}>
           <div
             className="absolute right-5 bg-black top-20 w-[350px] h-[250px] p-4 rounded-lg rounded-tr-none"
             onClick={(e) => e.stopPropagation()}
