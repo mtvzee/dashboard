@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { WeatherData } from '../../types/weatherData';
 
-const Weather = () => {
+const Weather:FC = () => {
   const [data, setData] = useState<WeatherData>();
   const [isOpen, setIsOpen] = useState(false);
 

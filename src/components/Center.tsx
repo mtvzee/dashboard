@@ -1,8 +1,9 @@
 import dayjs from 'dayjs';
+import { FC } from 'react';
 import { AiOutlineGoogle } from 'react-icons/ai';
 import { BiSearch } from 'react-icons/bi';
 
-const Center = () => {
+const Center:FC = () => {
   return (
     <div className="absolute flex flex-col items-center -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
       <div className="font-bold text-9xl drop-shadow-xl shadow-black">
