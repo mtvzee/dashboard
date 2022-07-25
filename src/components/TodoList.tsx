@@ -7,9 +7,6 @@ const TodoList: FC = () => {
   const [input, setInput] = useState('');
   const [todoList, setTodoList] = useState<TodoType[]>([]);
 
-  console.log(todoList);
-  
-
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!input) return;
@@ -27,7 +24,7 @@ const TodoList: FC = () => {
   return (
     <>
       <button
-        className="absolute bottom-0 right-0"
+        className="absolute right-3 bottom-3"
         onClick={() => setIsOpen(true)}
       >
         Todo

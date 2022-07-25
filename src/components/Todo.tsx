@@ -1,4 +1,4 @@
-import { FC, FormEvent, useState } from 'react';
+import { FC, FormEvent, useEffect, useRef, useState } from 'react';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { BiTrash } from 'react-icons/bi';
 import { TodoType } from '../../types/todo';
@@ -11,14 +11,21 @@ type Props = {
   setTodoList: React.Dispatch<React.SetStateAction<TodoType[]>>;
 };
 const Todo: FC<Props> = ({ id, text, isCompleted, todoList, setTodoList }) => {
-  const [isEditable, setIsEditable] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isEditing) {
+      inputRef.current?.focus();
+    }
+  }, [isEditing]);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsEditable(false);
+    setIsEditing(false);
   };
   const handleComplete = (id: number) => {
-    if (isEditable) return;
+    if (isEditing) return;
     setTodoList(
       todoList.map((todo) => {
         if (todo.id === id) {
@@ -34,7 +41,7 @@ const Todo: FC<Props> = ({ id, text, isCompleted, todoList, setTodoList }) => {
   const handleDelete = (id: number) => {
     setTodoList(todoList.filter((todo) => todo.id !== id));
   };
-  const handleEdit = (id: number, editedText: string) => {
+  const handleEditTodo = (id: number, editedText: string) => {
     setTodoList(
       todoList.map((todo) => {
         if (todo.id === id) {
@@ -51,22 +58,20 @@ const Todo: FC<Props> = ({ id, text, isCompleted, todoList, setTodoList }) => {
   return (
     <li className="flex items-center justify-between ">
       <form
-        className={`flex-auto transition hover:scale-105 ${
-          isCompleted && 'bg-red-400'
-        }`}
+        className="flex-auto transition hover:scale-105"
         onSubmit={(e) => handleSubmit(e)}
         onClick={() => handleComplete(id)}
       >
         <input
           type="text"
-          className={`w-full bg-transparent outline-none cursor-pointer ${
-            isEditable && 'border-b animate-pulse'
+          // className="w-full bg-transparent outline-none cursor-pointer focus:border-b focus:animate-pulse"
+          className={`w-full bg-transparent outline-none cursor-pointer focus:border-b focus:animate-pulse ${
+            isCompleted && 'line-through decoration-2  text-white/60'
           }`}
-          disabled={!isEditable}
-          // value={editedText}
-          // onChange={(e) => setEditedText(e.target.value)}
+          disabled={!isEditing}
+          ref={inputRef}
           value={text}
-          onChange={(e) => handleEdit(id, e.target.value)}
+          onChange={(e) => handleEditTodo(id, e.target.value)}
         />
       </form>
       <div className="flex items-center">
@@ -78,7 +83,7 @@ const Todo: FC<Props> = ({ id, text, isCompleted, todoList, setTodoList }) => {
         </button>
         <button
           className="transition hover:scale-105 hover:text-green-500"
-          onClick={() => setIsEditable(!isEditable)}
+          onClick={() => setIsEditing(!isEditing)}
         >
           <AiOutlineEdit className="w-5 h-5" />
         </button>
