@@ -30,7 +30,7 @@ const TodoList: FC = () => {
         Todo
       </button>
       {isOpen && (
-        <div className="fixed inset-0" onClick={() => setIsOpen(false)}>
+        <div className="fixed inset-0 z-10" onClick={() => setIsOpen(false)}>
           <div
             className="absolute w-[300px]  bg-black bottom-10 right-5 rounded-lg rounded-br-none p-2"
             onClick={(e) => e.stopPropagation()}
