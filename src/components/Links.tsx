@@ -35,7 +35,7 @@ const Links = () => {
       {isOpen && (
         <div className="fixed inset-0 z-10" onClick={() => setIsOpen(false)}>
           <div
-            className="absolute w-56 p-4 bg-black rounded-lg rounded-tl-none top-10 left-3"
+            className="absolute w-64 p-4 bg-black rounded-lg rounded-tl-none top-10 left-3"
             onClick={(e) => e.stopPropagation()}
           >
             {showForm ? (
@@ -54,22 +54,22 @@ const Links = () => {
                     <div>名前</div>
                     <input
                       type="text"
-                      className="px-2 py-1 bg-transparent border-b outline-none border-b-neutral-400 focus:border-b-neutral-100"
+                      className="w-full px-2 py-1 bg-transparent border-b outline-none border-b-neutral-400 focus:border-b-neutral-100"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                     />
                   </label>
                   <label>
-                    <div>リンク先</div>
+                    <div>URL</div>
                     <input
                       type="text"
-                      placeholder="example.com"
-                      className="px-2 py-1 bg-transparent border-b outline-none border-b-neutral-400 focus:border-b-neutral-100"
+                      placeholder="https://www.example.com"
+                      className="w-full px-2 py-1 bg-transparent border-b outline-none border-b-neutral-400 focus:border-b-neutral-100"
                       value={url}
                       onChange={(e) => setUrl(e.target.value)}
                     />
                   </label>
-                  <button className="py-1 transition rounded-full bg-neutral-500 hover:bg-neutral-500/80">
+                  <button className="py-1 transition rounded-full bg-neutral-500 hover:bg-neutral-500/80 ">
                     作成
                   </button>
                 </form>
