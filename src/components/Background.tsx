@@ -1,43 +1,19 @@
 import { FC, ReactNode, useEffect, useState } from 'react';
-
-type BgImage = {
-  id: number;
-  pageURL: string;
-  type: string;
-  tags: string;
-  previewURL: string;
-  previewWidth: number;
-  previewHeight: number;
-  webformatURL: string;
-  webformatWidth: number;
-  webformatHeight: number;
-  largeImageURL: string;
-  imageWidth: number;
-  imageHeight: number;
-  imageSize: number;
-  views: number;
-  downloads: number;
-  collections: number;
-  likes: number;
-  comments: number;
-  user_id: number;
-  user: string;
-  userImageURL: string;
-};
+import { BackgroundType } from '../../types/background';
 
 type Props = {
   children: ReactNode;
 };
 
 const Background: FC<Props> = ({ children }) => {
-  const [bgImageData, setBgImageData] = useState<BgImage[]>([]);
+  const [bgImage, setBgImage] = useState<BackgroundType>();
   useEffect(() => {
     const fetchBackgroundImage = async () => {
       const res = await fetch(
-        `https://pixabay.com/api/?key=28160622-0377c9a513987770fa00672f3&q=cosmo&image_type=photo`
+        `https://api.unsplash.com/photos/random?query=landscape&client_id=${process.env.REACT_APP_UNSPLASH_ACCESS_KEY}`
       );
       const data = await res.json();
-      setBgImageData(data.hits);
+      setBgImage(data);
     };
     fetchBackgroundImage();
   }, []);
@@ -45,12 +21,12 @@ const Background: FC<Props> = ({ children }) => {
     <div
       className="relative w-full h-screen bg-center bg-no-repeat bg-cover"
       style={{
-        backgroundImage: `url(${
-          bgImageData[Math.floor(Math.random() * bgImageData.length)]
-            ?.largeImageURL
-        })`,
+        backgroundImage: `url(${bgImage?.urls.full})`,
       }}
     >
+      <div className="absolute text-xs bottom-3 left-3">
+        {bgImage?.location.title ?? ''}
+      </div>
       {children}
     </div>
   );
