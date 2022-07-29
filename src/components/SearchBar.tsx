@@ -14,7 +14,7 @@ const SearchBar: FC = () => {
       className="flex items-center  md:w-[500px]  py-4 px-6  rounded-full space-x-3 backdrop-invert backdrop-opacity-70 absolute -bottom-40 w-[350px]"
       onSubmit={(e) => handleSubmit(e)}
     >
-      <BiSearch className="flex-none w-8 h-8" />
+      <AiOutlineGoogle className="flex-none w-8 h-8" />
       <input
         type="text"
         placeholder="Search"
@@ -23,7 +23,7 @@ const SearchBar: FC = () => {
         onChange={(e) => setKeyword(e.target.value)}
       />
       <button>
-        <AiOutlineGoogle className="flex-none w-8 h-8" />
+        <BiSearch className="flex-none w-8 h-8" />
       </button>
     </form>
   );
